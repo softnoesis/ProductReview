@@ -1,0 +1,80 @@
+.reviewpage-index-index .page-title-wrapper {
+    text-align: center;
+}
+.reviewpage-index-index h1{
+    font: 500 24px/1.35 Montserrat, Helvetica Neue, Verdana, Arial, sans-serif;
+    color: #282828;
+    margin: 0 0 20px;
+}
+.reviewsconts .reviewrow {
+    float: left;
+    width: 100%;
+    background-color: #ffffff;
+    margin-bottom: 15px;
+    box-shadow: 0px 11px 20px rgb(0 0 0 / 4%);
+    -moz-box-shadow: 0px 11px 20px rgba(0,0,0,0.04);
+    -webkit-box-shadow: 0px 11px 20px rgb(0 0 0 / 4%);
+    padding: 15px;
+}
+.reviewsconts .reviewrow .reviewtop .prodimg {
+    float: left;
+    width: 82px;
+    height: 82px;
+}
+.reviewsconts .reviewrow .reviewtop .prodimg a img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.reviewsconts .reviewrow .reviewtop .prodinfo {
+    margin-left: 112px;
+}
+.reviewsconts .reviewrow .reviewtop .prodinfo h4 {
+    font-size: 20px;
+    font-weight: 600;
+}
+.reviewpage-index-index h4 {
+    font: 500 16px/1.35 Montserrat, Helvetica Neue, Verdana, Arial, sans-serif;
+    margin: 0 0 10px;
+}
+.reviewsconts .reviewrow .reviewtop .prodinfo h4 a {
+    color: #282828;
+}
+.reviewsconts .reviewrow .reviewtop .prodinfo .product-reviews-summary {
+    float: left;
+}
+.rating-summary .rating-result {
+    margin-top: -3px;
+}
+.reviewsconts .reviewrow .reviewmsg {
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+}
+.reviewsconts .reviewrow .reviewmsg h5 {
+    font-size: 18px;
+    font-weight: 600;
+}
+.reviewpage-index-index h5 {
+    font: 500 14px/1.35 Montserrat, Helvetica Neue, Verdana, Arial, sans-serif;
+    margin: 0 0 10px;
+}
+.reviewsconts .reviewrow .reviewmsg p {
+    font-size: 16px;
+    color: #8a8585;
+    margin-bottom: 10px;
+}
+.reviewsconts .reviewrow .reviewmsg .sayinfo {
+    text-align: right;
+    font-size: 15px;
+    color: #333;
+}
+.reviewsconts .reviewrow .reviewmsg .sayinfo .date {
+    font-size: 12px;
+    color: #8a8585;
+    font-weight: 300;
+}
+@media (min-width: 768px){
+    .page-main > .page-title-wrapper .page-title {
+    display: inline-block;
+}

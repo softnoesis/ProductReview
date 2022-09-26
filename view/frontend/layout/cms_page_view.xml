@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Softnoesis
+ * Copyright(C) 21/2022 Softnoesis <contact@softnoesis.com>
+ * @package Softnoesis_RelatedProduct
+ * @copyright Copyright(C) 2015 Softnoesis (contact@softnoesis.com)
+ * @author Softnoesis <contact@softnoesis.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		  <referenceContainer name="content">
+		        <block class="Softnoesis\ProductReview\Block\Review" name="homereview.list" template="Softnoesis_ProductReview::home.phtml"></block>
+	      </referenceContainer>
+	</body>
+</page>

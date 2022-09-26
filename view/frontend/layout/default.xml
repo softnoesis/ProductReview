@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Softnoesis
+ * Copyright(C) 21/2022 Softnoesis <contact@softnoesis.com>
+ * @package Softnoesis_RelatedProduct
+ * @copyright Copyright(C) 2015 Softnoesis (contact@softnoesis.com)
+ * @author Softnoesis <contact@softnoesis.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Softnoesis_ProductReview::css/custom.css" />
+        <css src="Softnoesis_ProductReview::css/owl.carousel.css" />
+        <css src="Softnoesis_ProductReview::css/owl.theme.default.css" />
+    </head>
+    <update handle="default_head_blocks"/>
+    <body>
+        <referenceBlock name="footer_links">
+            <block class="Softnoesis\ProductReview\Block\FooterLink" ifconfig="Softnoesis_tab/general/enable" name="team-footer-link" after="privacy-policy-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Review</argument>
+                    <argument name="path" xsi:type="string" translate="true">reviewpage</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

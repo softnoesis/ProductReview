@@ -1,0 +1,112 @@
+<?php
+$isEnable = $block->getReviewConfigValue();
+$isEnableHome = $block->getHomeConfigValue();
+if ($isEnable == 1):
+    if ($isEnableHome == 1):?>
+<h1 class="sns__review-title">Reviews</h1>
+        <?php
+        $reviewsCollection = $block->getHomeReviewsCollection();
+        if ($reviewsCollection && count($reviewsCollection) > 0) {?>
+  <div class="owl-carousel owl-theme">
+            <?php foreach ($reviewsCollection as $review) {
+                if ($review->getStatusId() == 1) { ?>
+          <div class="item">
+                      <?php
+                        $ProductId = $review->getEntityPkValue();
+                        $product = $block->getProduct($ProductId);
+                        $MediaUrl = $block->getBaseMediaDir();
+                        $ProductImage = $product->getSmallImage();
+                        ?>
+            <div class="product-image"><a href="<?php echo $product->getProductUrl();?>"><img src="<?php echo $MediaUrl.'catalog/product'.$ProductImage;?>"></a></div>
+            <div class="product-name"><?php echo $product->getName()?></div>
+            <div class="review-title"><?php echo $review->getTitle();?></div>
+              <div class="description"><?php echo $review->getDetail();?>
+            
+          </div>
+             
+              <div class="ratingimage">
+                    <?php
+                    // Display Average Rating of Review
+                    $countRatings = count($review->getRatingVotes());
+                    /*if ($countRatings > ) {*/
+                    ?>
+                 <div class="review-ratings">
+                        <?php
+                        $allRatings = '';
+                        foreach ($review->getRatingVotes() as $vote) {
+                            $allRatings = $vote->getPercent();
+                        }
+                        $allRatingsAvg = $allRatings;
+                        ?>
+                        <!-- Start Code for Rating -->
+                                        <?php if ($allRatingsAvg) { ?>
+                                            <div class="product-reviews-summary short">
+                                                <div class="rating-summary">
+                                                    <div title="<?php echo (int)$allRatingsAvg; ?>%" class="rating-result">
+                                                        <span style="width:<?php echo (int)$allRatingsAvg; ?>%"><span><?php echo (int)$allRatingsAvg; ?>%</span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                        <!-- End Code for Rating -->
+                </div>
+                 <div class="review-details">
+                  <div class="review-nickname"><?php echo "-".$review->getNickname();?></div>
+                            <?php
+                            $db_date = date('Y-m-d', strtotime($review->getCreatedAt()));
+                            $database_date = strtotime($db_date);
+                            $yesterdate = date('Y-m-d', strtotime(date('Y-m-d') . ' -1 day'));
+                            $yeststring = strtotime($yesterdate);
+                            $date = date('Y-m-d');
+                            $cuurentdata = strtotime($date);
+                            if ($database_date == $cuurentdata) {?>
+                                <div class="review-date">Today</div>
+                            <?php } elseif ($database_date == $yeststring) { ?>
+                                <div class="review-date">Yesterday</div>
+                            <?php } else { ?>
+                                 <div class="review-date"><?php $date = new DateTime($review->getCreatedAt());
+                                    echo $date->format('d F, Y');?></div>
+                            <?php }
+                            ?>
+                  </div>
+            </div> 
+          </div>
+                      <?php
+                  /*}*/
+                }
+            } ?>
+    <div class="slick-slider"><div class="view-more"><a href="./reviewpage">View More</a></div></div>
+</div>
+        <?php }
+        ?>
+    <?php endif; ?>
+<?php endif; ?>
+<script>
+  require([
+    'jquery',
+    'Softnoesis_ProductReview/js/owl.carousel',
+  ], function($) {
+    jQuery(document).ready(function() {
+      var owl = $('.owl-carousel');
+      owl.owlCarousel({
+        margin: 10,
+        nav: true,
+        loop: false,
+        dots: true,
+        nav: false,
+        responsive: {
+          0: {
+            items: 2
+          },
+          600: {
+            items: 3
+          },
+          1000: {
+            items: 5
+          }
+        }
+      });
+    });
+  });
+</script>
+

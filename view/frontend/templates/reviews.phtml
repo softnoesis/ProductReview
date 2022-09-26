@@ -1,0 +1,78 @@
+<?php
+ // Get reviews collection
+$isEnable = $block->getReviewConfigValue();
+if ($isEnable == 1):
+    $reviewsCollection = $block->getReviewsCollection();
+    $dateFormat = $block->getDateFormat() ? : \IntlDateFormatter::SHORT;
+    if ($reviewsCollection && count($reviewsCollection) > 0) { ?>
+<div class="reviewsconts">
+        <?php foreach ($reviewsCollection as $review) {
+            if ($review->getStatusId() == 1) {
+                $ProductId = $review->getEntityPkValue();
+                $product = $block->getProduct($ProductId);
+                $MediaUrl = $block->getBaseMediaDir();
+                $ProductImage = $product->getData('thumbnail');?>
+                
+                <div class="reviewrow">
+                    <div class="reviewtop">
+                        <div class="prodimg">
+                          <a href="<?php echo $product->getProductUrl();?>"><img src="<?php echo $MediaUrl.'catalog/product'.$ProductImage;?>"></a>
+                        </div>
+                        <div class="prodinfo">
+                            <h4><a href="<?php echo $product->getProductUrl();?>"><?php echo $product->getName()?></a></h4>
+                                 <?php
+                                    $allRatings = '';
+                                    foreach ($review->getRatingVotes() as $vote) {
+                                        $allRatings = $vote->getPercent();
+                                    }
+                                    $allRatingsAvg = $allRatings;
+                                    ?>
+                        <!-- Start Code for Rating -->
+                                        <?php if ($allRatingsAvg) { ?>
+                                            <div class="product-reviews-summary short">
+                                                <div class="rating-summary">
+                                                    <div title="<?php echo (int)$allRatingsAvg; ?>%" class="rating-result">
+                                                        <span style="width:<?php echo (int)$allRatingsAvg; ?>%"><span><?php echo (int)$allRatingsAvg; ?>%</span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                        <!-- End Code for Rating -->
+                        </div>
+                    </div>
+                    <div class="reviewmsg">
+                        <h5><?php echo $review->getTitle();?></h5>
+                        <p><?php echo $review->getDetail();?></p>
+                        <div class="sayinfo"><?php echo "-".$review->getNickname();?>
+                                <?php
+                                $db_date = date('Y-m-d', strtotime($review->getCreatedAt()));
+                                $database_date = strtotime($db_date);
+                                $yesterdate = date('Y-m-d', strtotime(date('Y-m-d') . ' -1 day'));
+                                $yeststring = strtotime($yesterdate);
+                                $date = date('Y-m-d');
+                                $cuurentdata = strtotime($date);
+                                if ($database_date == $cuurentdata) {?>
+                                    <span class="date">Today</span>
+                                <?php } elseif ($database_date == $yeststring) { ?>
+                                    <span class="date">Yesterday</span>
+                                <?php } else { ?>
+                                <span class="date"><?php $date = new DateTime($review->getCreatedAt());
+                                echo $date->format('d F, Y');?></span>
+                                <?php }
+                                ?>
+                        </div>
+                    </div>
+                </div>
+            <?php }
+        } ?>
+</div>
+    <?php }
+    ?>
+
+    <?php if ($block->getPagerHtml()): ?>
+    <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+      <?php else: ?>
+   <div class="message info empty"><span><?php echo __('No any record.'); ?></span></div>
+<?php endif ?>
+<?php endif; ?>
+
